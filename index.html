@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetMatch - Kickstarter Kampanja | Povežite se sa vašim ljubimcem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --secondary: #F7931E;
+            --accent: #4ECDC4;
+            --dark: #1A1A2E;
+            --light: #FFF8F0;
+            --success: #2ECC71;
+            --gradient-1: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            --gradient-2: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+            --gradient-bg: linear-gradient(180deg, #FFF8F0 0%, #FFE8D6 100%);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--gradient-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            opacity: 0.05;
+            top: -250px;
+            right: -250px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--gradient-2);
+            opacity: 0.05;
+            bottom: -200px;
+            left: -200px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--dark);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .campaign-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            max-width: 600px;
+            height: 12px;
+            background: rgba(255, 107, 53, 0.2);
+            border-radius: 100px;
+            margin: 2rem auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 100px;
+            width: 0%;
+            animation: fillProgress 2s ease-out 0.8s forwards;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes fillProgress {
+            to { width: 45%; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gradient-1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            animation: fadeInUp 1s ease-out 1s both;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Rewards Section */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .reward-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+        }
+
+        .reward-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .reward-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-1);
+        }
+
+        .reward-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .reward-card.featured:hover {
+            transform: translateY(-10px) scale(1.07);
+        }
+
+        .reward-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .reward-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .reward-description {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .reward-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .reward-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .reward-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .reward-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Calculator Section */
+        .calculator-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 3rem auto;
+        }
+
+        .calculator-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .result-display {
+            background: var(--gradient-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .result-percentage {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .valuation-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .valuation-item {
+            text-align: center;
+        }
+
+        .valuation-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .valuation-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 50%;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--light);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 2rem 1.5rem;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .campaign-stats {
+                gap: 2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+                margin-right: 0;
+                padding-left: 2rem;
+                padding-right: 1.5rem;
+                text-align: left;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .calculator-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .result-percentage {
+                font-size: 3rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="logo">🐾 PetMatch</h1>
+            <p class="tagline">Povežite se sa savršenim pružateljem usluga za vašeg ljubimca</p>
+            
+            <div class="campaign-stats">
+                <div class="stat">
+                    <span class="stat-value" id="raised-amount">23,220€</span>
+                    <span class="stat-label">Prikupljeno</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">51,600€</span>
+                    <span class="stat-label">Cilj</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="backers-count">187</span>
+                    <span class="stat-label">Podržavatelja</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="days-left">28</span>
+                    <span class="stat-label">Dana preostalo</span>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+
+            <a href="#rewards" class="cta-button">Podržite Projekt</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Zašto PetMatch?</h2>
+        <div class="about-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Sve na jednom mjestu</h3>
+                <p>Pronađite sve usluge za vašeg ljubimca u jednoj aplikaciji - od šetnje i čuvanja do veterinarskih pregleda i frizerskih usluga.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Sigurnost i povjerenje</h3>
+                <p>Svi pružatelji usluga prolaze striktnu verifikaciju. Escrow plaćanje štiti obje strane transakcije.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Transparentne recenzije</h3>
+                <p>Sustav ocjenjivanja i recenzija osigurava kvalitetu usluga. Pročitajte iskustva drugih vlasnika prije odabira.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>GPS praćenje</h3>
+                <p>Pratite svog ljubimca u realnom vremenu tijekom šetnje. Primajte fotografije i video zapise.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Chat komunikacija</h3>
+                <p>Direktna komunikacija s pružateljem usluga. Postavite pitanja i dogovorite detalje jednostavno.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Jednostavno plaćanje</h3>
+                <p>Sigurno online plaćanje karticom ili digitalnim novčanikom. Bez skrivenih troškova.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution -->
+    <section>
+        <h2>Problem koji rješavamo</h2>
+        <div class="about-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>Nedostatak vremena</h3>
+                <p>Preko 60% vlasnika ljubimaca nema dovoljno vremena za adekvatnu brigu zbog posla i drugih obaveza.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Teško pronalaženje usluga</h3>
+                <p>Vlasnici troše sate tražeći pouzdane pružatelje usluga putem preporuka ili društvenih mreža.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">❓</div>
+                <h3>Nedostatak povjerenja</h3>
+                <p>Vlasnici ljubimaca oklijevaju povjeriti svoje ljubimce nepoznatim osobama bez verifikacije i recenzija.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tržište -->
+    <section style="background: white; border-radius: 30px; padding: 4rem 3rem;">
+        <h2>Ogromna tržišna prilika</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="margin-bottom: 2rem;">
+                <div style="font-size: 4rem; text-align: center; margin-bottom: 1rem;">🌍</div>
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 1rem;">Globalno tržište vrijednosti 259 milijardi USD</h3>
+                <p style="text-align: center; opacity: 0.8;">Pet care industrija kontinuirano raste s projiciranim godišnjim rastom od 6.6% do 2032. godine.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #FF6B35;">67%</div>
+                    <div style="opacity: 0.7;">kućanstava ima ljubimca</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #FF6B35;">152 M $</div>
+                    <div style="opacity: 0.7;">potrošnja u SAD-u (2024)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #FF6B35;">6.6%</div>
+                    <div style="opacity: 0.7;">godišnji rast tržišta</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section id="rewards">
+        <h2>Nagrade za podržavatelje</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; opacity: 0.8; font-size: 1.1rem;">
+            Odaberite razinu podrške i postanite dio PetMatch revolucije. Svi iznosi uključuju ekskluzivne beneficije!
+        </p>
+        
+        <div class="rewards-grid">
+            <!-- Early Bird -->
+            <div class="reward-card">
+                <div class="reward-badge">Early Bird</div>
+                <div class="reward-price">10€</div>
+                <div class="reward-title">Rani podržavatelj</div>
+                <p class="reward-description">Postanite jedan od prvih koji podržavaju PetMatch!</p>
+                <ul class="reward-features">
+                    <li>Personalizirani email zahvale</li>
+                    <li>Vaše ime u "Hall of Fame" na web stranici</li>
+                    <li>Ekskluzivni digitalni badge</li>
+                    <li>Ažuriranja o razvoju projekta</li>
+                </ul>
+                <button class="back-button" onclick="selectReward(10)">Podržite projekt</button>
+            </div>
+
+            <!-- Pet Lover -->
+            <div class="reward-card">
+                <div class="reward-price">25€</div>
+                <div class="reward-title">Ljubitelj životinja</div>
+                <p class="reward-description">Za one koji cijene kvalitetnu brigu o ljubimcima.</p>
+                <ul class="reward-features">
+                    <li>Sve iz prethodne razine</li>
+                    <li>20€ kredit za korištenje aplikacije</li>
+                    <li>Besplatno premium članstvo (3 mjeseca)</li>
+                    <li>PetMatch naljepnica</li>
+                </ul>
+                <button class="back-button" onclick="selectReward(25)">Podržite projekt</button>
+            </div>
+
+            <!-- Premium Supporter -->
+            <div class="reward-card featured">
+                <div class="reward-badge" style="background: linear-gradient(135deg, #FFD700, #FFA500);">Najpopularnije</div>
+                <div class="reward-price">50€</div>
+                <div class="reward-title">Premium podržavatelj</div>
+                <p class="reward-description">Najbolja vrijednost za novac!</p>
+                <ul class="reward-features">
+                    <li>Sve iz prethodne razine</li>
+                    <li>50€ kredit za korištenje aplikacije</li>
+                    <li>Besplatno premium članstvo (6 mjeseci)</li>
+                    <li>Ekskluzivni PetMatch majica</li>
+                    <li>Pristup beta verziji aplikacije</li>
+                </ul>
+                <button class="back-button" onclick="selectReward(50)">Podržite projekt</button>
+            </div>
+
+            <!-- VIP Backer -->
+            <div class="reward-card">
+                <div class="reward-badge">VIP</div>
+                <div class="reward-price">100€</div>
+                <div class="reward-title">VIP podržavatelj</div>
+                <p class="reward-description">Ekskluzivni paketi za prave vizionare.</p>
+                <ul class="reward-features">
+                    <li>Sve iz prethodne razine</li>
+                    <li>120€ kredit za korištenje aplikacije</li>
+                    <li>Doživotno premium članstvo</li>
+                    <li>PetMatch premium paket (majica, torba, naljepnice)</li>
+                    <li>Mjesečni izvještaj o rastu projekta</li>
+                    <li>Video poziv s osnivačkim timom</li>
+                </ul>
+                <button class="back-button" onclick="selectReward(100)">Podržite projekt</button>
+            </div>
+
+            <!-- Golden Paw -->
+            <div class="reward-card">
+                <div class="reward-badge" style="background: linear-gradient(135deg, #FFD700, #FF6B35);">Golden Paw</div>
+                <div class="reward-price">250€</div>
+                <div class="reward-title">Zlatna šapa</div>
+                <p class="reward-description">Za prave ljubitelje životinja i inovacija.</p>
+                <ul class="reward-features">
+                    <li>Sve iz prethodne razine</li>
+                    <li>350€ kredit za korištenje aplikacije</li>
+                    <li>Vaš ljubimac kao službena maskota u aplikaciji</li>
+                    <li>Profesionalna fotosesija vašeg ljubimca</li>
+                    <li>Besplatno korištenje svih usluga (1 godina)</li>
+                    <li>Utjecaj na razvoj novih funkcionalnosti</li>
+                </ul>
+                <button class="back-button" onclick="selectReward(250)">Podržite projekt</button>
+            </div>
+
+            <!-- Platinum -->
+            <div class="reward-card">
+                <div class="reward-badge" style="background: linear-gradient(135deg, #E5E4E2, #C0C0C0);">Platinum</div>
+                <div class="reward-price">500€</div>
+                <div class="reward-title">Platinum Partner</div>
+                <p class="reward-description">Postanite dio tima i oblikujte budućnost PetMatcha.</p>
+                <ul class="reward-features">
+                    <li>Sve iz prethodne razine</li>
+                    <li>800€ kredit za korištenje aplikacije</li>
+                    <li>Posebna zahvala u aplikaciji i na web stranici</li>
+                    <li>VIP poziv na službeno pokretanje aplikacije</li>
+                    <li>Kvartalni sastanci s timom</li>
+                    <li>Prioritetna korisnička podrška</li>
+                    <li>Mogućnost imenovanja nove funkcionalnosti</li>
+                </ul>
+                <button class="back-button" onclick="selectReward(500)">Podržite projekt</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Calculator -->
+    <section id="calculator" style="background: white; border-radius: 30px; padding: 4rem 2rem;">
+        <h2>Kalkulator investicije</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; opacity: 0.8;">
+            Zainteresirani za veće ulaganje? Izračunajte koliki postotak vlasništva dobivate.
+        </p>
+        
+        <div class="calculator-container">
+            <h3>💰 Investor Calculator</h3>
+            
+            <div class="input-group">
+                <label for="investment-amount">Iznos ulaganja (EUR)</label>
+                <input 
+                    type="number" 
+                    id="investment-amount" 
+                    placeholder="Unesite iznos (min. 1,000€)"
+                    min="1000"
+                    step="100"
+                    oninput="calculateOwnership()"
+                >
+            </div>
+
+            <div class="result-display" id="result-display" style="display: none;">
+                <div class="result-percentage" id="ownership-percentage">0%</div>
+                <div class="result-label">Vlasništvo u tvrtki</div>
+                
+                <div class="valuation-info">
+                    <div class="valuation-item">
+                        <div class="valuation-value" id="shares-value">€0</div>
+                        <div class="valuation-label">Vrijednost vaših dionica</div>
+                    </div>
+                    <div class="valuation-item">
+                        <div class="valuation-value" id="projected-value">€0</div>
+                        <div class="valuation-label">Projekcija za 3 god.</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(78, 205, 196, 0.1); border-radius: 10px;">
+                    <div style="font-weight: 700; margin-bottom: 0.5rem;">Procjena tvrtke: 300,000€</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">
+                        Bazirana na projekciji prihoda i tržišnoj vrijednosti sličnih startupa u pet tech industriji.
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; text-align: center;">
+                    Za investicije preko 10,000€ kontaktirajte nas za detaljnije uvjete i dodatne beneficije.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section>
+        <h2>Razvojni plan</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Ožujak 2026</div>
+                    <h3>Završetak Kickstarter kampanje</h3>
+                    <p>Prikupljanje sredstava i finalizacija početnog tima.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Travanj - Rujan 2026</div>
+                    <h3>Razvoj i testiranje</h3>
+                    <p>Razvoj MVP verzije aplikacije, dizajn sučelja, i interno testiranje funkcionalnosti.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Listopad 2026</div>
+                    <h3>Beta testiranje</h3>
+                    <p>Zatvorena beta verzija za podržavatelje i regrutacija prvih pružatelja usluga.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Studeni 2026</div>
+                    <h3>Službeno pokretanje</h3>
+                    <p>Javno pokretanje PetMatch aplikacije u Hrvatskoj i regiji.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2027</div>
+                    <h3>Širenje i rast</h3>
+                    <p>Proširenje na nova geografska područja i dodavanje novih funkcionalnosti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <h2>Često postavljana pitanja</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Kada će aplikacija biti dostupna?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Planiramo javno pokretanje aplikacije u listopadu 2026. godine. Podržavatelji će dobiti pristup beta verziji već u rujnu 2026.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Što ako kampanja ne uspije?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Ako ne dosegnemo cilj od 51,600€, sva sredstva će biti vraćena podržavateljima. Vaš novac je siguran!</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Kako će pružatelji usluga biti verificirani?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Svi pružatelji prolaze kroz višestupanjsku verifikaciju: provjera identiteta, certifikata, potvrda osiguranja i background check. Dodatno, sustav recenzija omogućava vlasnicima da dijele svoja iskustva.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Koji će biti troškovi korištenja aplikacije?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Za vlasnike ljubimaca, aplikacija je potpuno besplatna! Zaradom od 15% provizije pokrivamo troškove platforme. Pružatelji usluga mogu nadograditi na premium račun (5€/mjesec) za dodatne beneficije.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Na kojim platformama će aplikacija biti dostupna?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>PetMatch će biti dostupan na iOS (iPhone/iPad) i Android platformama. Koristimo React Native tehnologiju što nam omogućava razvoj za obje platforme istovremeno.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Mogu li postati pružatelj usluga?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Apsolutno! Ako pružate usluge vezane uz brigu o ljubimcima (šetnja, čuvanje, frizura, veterina, trening), možete se prijaviti odmah nakon pokretanja. Kontaktirajte nas za rani pristup programu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Final CTA -->
+    <section style="text-align: center; padding: 6rem 2rem;">
+        <h2 style="margin-bottom: 1.5rem;">Budite dio revolucije!</h2>
+        <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; opacity: 0.8;">
+            Pridružite se stotinama ljubitelja životinja koji već podržavaju PetMatch. 
+            Zajedno možemo stvoriti bolji svijet za naše ljubimce!
+        </p>
+        <a href="#rewards" class="cta-button" style="font-size: 1.2rem; padding: 1.5rem 4rem;">
+            Podržite nas danas!
+        </a>
+        
+        <div style="margin-top: 3rem; opacity: 0.6;">
+            <p>🔒 Sigurno plaćanje | 💯 Garancija povrata novca | 🌟 100% transparentnost</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="margin-bottom: 2rem;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem;">🐾 PetMatch</h3>
+                <p>Vaša platforma za brigu o ljubimcima</p>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+            
+            <div style="opacity: 0.6; font-size: 0.9rem;">
+                <p>&copy; 2026 PetMatch. Sva prava pridržana.</p>
+                <p style="margin-top: 0.5rem;">Izrađeno s ❤️ za ljubitelje životinja</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Reward Selection
+        function selectReward(amount) {
+            alert(`Hvala vam na podršci od ${amount}€! U stvarnoj implementaciji, ovdje bi bio sustav za plaćanje.`);
+        }
+
+        // Investment Calculator
+        const COMPANY_VALUATION = 300000; // Company valuation in EUR
+        const MAX_EQUITY = 100; // Maximum equity percentage available
+
+        function calculateOwnership() {
+            const investmentAmount = parseFloat(document.getElementById('investment-amount').value) || 0;
+            const resultDisplay = document.getElementById('result-display');
+            
+            if (investmentAmount < 1000) {
+                resultDisplay.style.display = 'none';
+                return;
+            }
+            
+            // Calculate ownership percentage
+            let ownershipPercentage = (investmentAmount / COMPANY_VALUATION) * 100;
+            
+            // Cap at maximum equity
+            if (ownershipPercentage > MAX_EQUITY) {
+                ownershipPercentage = MAX_EQUITY;
+            }
+            
+            // Calculate share value (same as investment for pre-seed)
+            const sharesValue = investmentAmount;
+            
+            // Project 3-year value (assuming 3x growth based on similar startups)
+            const projectedValue = investmentAmount * 3;
+            
+            // Update display
+            document.getElementById('ownership-percentage').textContent = 
+                ownershipPercentage.toFixed(2) + '%';
+            document.getElementById('shares-value').textContent = 
+                '€' + sharesValue.toLocaleString('hr-HR');
+            document.getElementById('projected-value').textContent = 
+                '€' + projectedValue.toLocaleString('hr-HR');
+            
+            resultDisplay.style.display = 'block';
+            
+            // Add warning if max equity reached
+            if (ownershipPercentage >= MAX_EQUITY) {
+                const warning = document.createElement('div');
+                warning.style.cssText = 'margin-top: 1rem; padding: 1rem; background: rgba(255, 107, 53, 0.1); border-radius: 10px; color: #FF6B35; font-weight: 600;';
+                warning.textContent = 'Dosegnuta je maksimalna količina dostupnog vlasništva (100%). Za veće investicije kontaktirajte nas direktno.';
+                
+                // Remove existing warning if present
+                const existingWarning = resultDisplay.querySelector('[style*="rgba(255, 107, 53, 0.1)"]');
+                if (existingWarning && existingWarning.textContent.includes('maksimalna')) {
+                    existingWarning.remove();
+                }
+                
+                if (ownershipPercentage >= MAX_EQUITY) {
+                    resultDisplay.appendChild(warning);
+                }
+            }
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Add fade-in class to elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.feature-card, .reward-card, .timeline-item');
+            elements.forEach((el, index) => {
+                el.classList.add('fade-in');
+                el.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(el);
+            });
+        });
+
+        // Animate numbers
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString('hr-HR') + (element.id.includes('amount') ? '€' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger number animations when hero is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue(document.getElementById('raised-amount'), 0, 23220, 2000);
+                    animateValue(document.getElementById('backers-count'), 0, 187, 2000);
+                    animateValue(document.getElementById('days-left'), 0, 28, 2000);
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(document.querySelector('.hero'));
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+Content = value.toLocaleString('hr-HR') + (element.id.includes('amount') ? '€' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger number animations when hero is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue(document.getElementById('raised-amount'), 0, 23220, 2000);
+                    animateValue(document.getElementById('backers-count'), 0, 187, 2000);
+                    animateValue(document.getElementById('days-left'), 0, 28, 2000);
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(document.querySelector('.hero'));
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+              }
+            });
+        });
+    </script>
+</body>
+</html>
